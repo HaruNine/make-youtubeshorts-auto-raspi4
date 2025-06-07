@@ -1,0 +1,50 @@
+services:
+  mkshorts:
+    # blkio_config:
+    #     weight: 300
+    #     device_read_bps:
+    #       - path: /dev/mmcblk0
+    #         rate: 50MB
+    #     device_write_bps:
+    #       - path: /dev/mmcblk0
+    #         rate: 50MB
+    build: 
+      context: .
+    container_name: "mkshorts"
+    tmpfs:
+      - /app/temp:size=2G,exec
+      # - /app/subtitles:size=500m,exec
+    volumes:
+      - ./Backend:/app/Backend
+      # - ./temp:/app/temp
+      - ./uptemp:/app/uptemp
+      - ./subtitles:/app/subtitles
+      - ./fonts:/app/fonts
+      - ./Songs:/app/Songs
+      - ./log:/app/log
+      # - ./brand-oauth2.json:/app/Backend/brand-oauth2.json
+      # - ./client_secret.json:/app/Backend/client_secret.json
+    environment:
+      - ASSEMBLY_AI_API_KEY=${ASSEMBLY_AI_API_KEY}
+      - TIKTOK_SESSION_ID=${TIKTOK_SESSION_ID}
+      - PEXELS_API_KEY=${PEXELS_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - YOUTUBE_CHANNEL_ID=${YOUTUBE_CHANNEL_ID}
+      - IMAGEMAGICK_BINARY=${IMAGEMAGICK_BINARY}
+      - MAGICK_FONT_PATH=/app/fonts
+    entrypoint: []
+    command: tail -f /dev/null
+    restart: "unless-stopped"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.60"
+          memory: "3G"
+        reservations:
+          memory: "1G"
+    memswap_limit: 6G
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "2"

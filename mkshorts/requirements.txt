@@ -1,0 +1,23 @@
+--extra-index-url https://www.piwheels.org/simple
+setuptools
+wheel
+requests==2.31.0
+moviepy==2.2.1
+termcolor==2.4.0
+flask==3.0.0
+curl_cffi
+flask-cors==4.0.0
+playsound==1.2.2
+python-dotenv==1.0.0
+srt_equalizer==0.1.8
+platformdirs==4.1.0
+# undetected_chromedriver
+assemblyai
+brotli
+google-api-python-client 
+oauth2client
+openai
+google-generativeai
+matplotlib
+psutil
+pydub
